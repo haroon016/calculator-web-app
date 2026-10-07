@@ -2,6 +2,9 @@
 
 Everyday Calculator is a small, browser-based calculator app with four focused modes: basic arithmetic, scientific calculations, fixed-rate loan estimates, and tip splitting. It opens in Basic mode and lets you switch modes without leaving or reloading the page.
 
+- **Live application:** [calculator-web-app-bay.vercel.app](https://calculator-web-app-bay.vercel.app/)
+- **Source repository:** [github.com/haroon016/calculator-web-app](https://github.com/haroon016/calculator-web-app)
+
 ## Who it is for
 
 The app is for people who want a quick way to handle common calculations in one place, including students, households, and anyone estimating a loan payment or splitting a restaurant bill. It was chosen as a take-home project because it combines familiar arithmetic with distinct input and validation needs, while remaining small enough to build and review without a backend or external services.
@@ -19,11 +22,11 @@ The app is for people who want a quick way to handle common calculations in one 
 
 ### Basic
 
-Addition, subtraction, multiplication, division, decimal values, percentage conversion, sign toggle, clear, backspace, and equals. Percentage converts the current number to its decimal fraction (for example, `25` becomes `0.25`). Division by zero and out-of-range results show an error. Keyboard shortcuts include digits, `+`, `-`, `*`, `/`, `%`, decimal point, Enter/`=`, Backspace, Escape, and Delete.
+Addition, subtraction, multiplication, division, decimal values, percentage conversion, sign toggle, clear, backspace, and equals. Percentage converts the current number to its decimal fraction (for example, `25` becomes `0.25`). Division by zero and detected overflow or other unsupported numeric results show an error. Extremely small results may underflow to `0` without an error. Keyboard shortcuts include digits, `+`, `-`, `*`, `/`, `%`, decimal point, Enter/`=`, Backspace, Escape, and Delete.
 
 ### Scientific
 
-Arithmetic expressions with precedence and parentheses, decimal values, percentage, square root, square, powers, sign toggle, `sin`, `cos`, `tan`, `log`, and `ln`. Trigonometric functions use **degrees**. `log` is base 10 and `ln` is the natural logarithm. The expression parser rejects malformed expressions, invalid function domains, division by zero, and values outside the supported numeric range. Keyboard input and the on-screen keypad are supported.
+Arithmetic expressions with precedence and parentheses, decimal values, percentage, square root, square, powers, sign toggle, `sin`, `cos`, `tan`, `log`, and `ln`. Trigonometric functions use **degrees**. `log` is base 10 and `ln` is the natural logarithm. The expression parser reports malformed expressions, invalid function domains, division by zero, and detected overflow, underflow, or other unsupported numeric conditions. Some extremely small results may underflow to `0` without an error. Keyboard input and the on-screen keypad are supported.
 
 ### Loan / Mortgage
 
@@ -51,10 +54,17 @@ All calculation and rendering run in the browser. There is no server-side applic
 
 ## Install and run
 
-From the project directory:
+Clone the repository and install its dependencies:
 
 ```sh
+git clone https://github.com/haroon016/calculator-web-app.git
+cd calculator-web-app
 npm install
+```
+
+Start the development server:
+
+```sh
 npm run dev
 ```
 
@@ -112,6 +122,7 @@ The author should review and be prepared to explain all code and calculations in
 ## Known limitations
 
 - Values and theme selection are not saved across page reloads.
+- Some extremely small floating-point results may underflow to `0` without a reported error.
 - Tests cover calculation utilities, not rendered UI or real browser/device behavior. Verify layout, keyboard behavior, and assistive technology support in target browsers before relying on them.
 - The app requires a modern browser and the supported Node.js version to build. Internet Explorer is not supported.
 - Financial results are estimates for the stated assumptions, not lender quotes or payment instructions.
